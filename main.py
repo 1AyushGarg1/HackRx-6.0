@@ -41,11 +41,6 @@ def check(request):
 
 @app.post("/hackrx/run", response_model=ResponseModel)
 async def run(request_data: RequestModel, authorization: Optional[str] = Header(None)):
-    print ("authorization: ", authorization)
-    print ("API_KEY: ", f"Bearer {API_KEY}")
-    if authorization != f"Bearer {API_KEY}":
-        raise HTTPException(status_code=401, detail="Invalid/missing API key")
-    
     try:
         pc = Pinecone(api_key=pinecone_api_key)
         index_name = "ayush-trail-instance"
